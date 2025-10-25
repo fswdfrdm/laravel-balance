@@ -26,7 +26,7 @@
 - docker-compose exec app php artisan db:seed
 
 <pre>
-Проект развернут для тестирования, можно переходить к http запросам.
+Проект развернут для тестирования, можно переходить к http запросам
 </pre>
 
 ## Пример http запросов (с curl):
@@ -84,8 +84,8 @@ curl -X POST  http://host.docker.internal:8000/api/transfer \
 src/
 ├── app/
 │   ├── Http/
-│   │   └── Controller/
-│   │       └── BalanceController.php           # Основной контроллер API
+│   │   ├── Controller/
+│   │   │   └── BalanceController.php           # Основной контроллер API
 │   │   └── Request/
 │   │       └── BalanceRequest.php              # Валидация
 │   ├── Models/

@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: laravel_balance_app
+    restart: unless-stopped
+    working_dir: /var/www/html
+    volumes:
+      - ./src:/var/www/html
+    networks:
+      - laravel
+
+  nginx:
+    image: nginx:alpine
+    container_name: laravel_balance_nginx
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+    volumes:
+      - ./src:/var/www/html
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - laravel
+
+  postgres:
+    image: postgres:16
+    container_name: laravel_balance_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: laravel_balance
+      POSTGRES_USER: laravel_balance
+      POSTGRES_PASSWORD: laravel_balance
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - laravel
+
+volumes:
+  postgres_data:
+
+networks:
+  laravel:
+    driver: bridge

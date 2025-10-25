@@ -12,7 +12,7 @@ class Transaction extends Model
         'type',
         'amount',
         'related_user_id',
-        'description',
+        'comment',
     ];
 
     protected $casts = [
